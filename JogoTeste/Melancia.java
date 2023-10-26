@@ -1,0 +1,45 @@
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
+/**
+ * Write a description of class Melancia here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class Melancia extends Actor
+{
+    /**
+     * Act - do whatever the Melancia wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
+    public int temp = 30;
+    public void act()
+    {
+        moveAtaque();
+        acertarAlvo();
+    }
+    public void acertarAlvo(){
+        Actor b = getOneIntersectingObject(PINGUIMFLAMENGUISTA.class);
+        
+        if (b != null){
+        Counter counter = (Counter) getWorld().getObjects(Counter.class).get(0);
+        counter.add(1);
+        temp=0;
+        getWorld().removeObject(b);
+        getWorld().removeObject(this);
+        }
+        if(temp <1){
+            luven world = new luven();
+            Greenfoot.setWorld(world);
+        }
+    }
+    public void moveAtaque()
+    {
+    double angle = Math.toRadians( getRotation() );
+    int x = (int) Math.round(getX() - Math.cos(angle));
+    int y = (int) Math.round(getY() - Math.sin(angle));
+    
+    setLocation(x, y);
+    }
+}
+
